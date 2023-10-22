@@ -24,9 +24,9 @@ fun main(args: Array<String>) {
         "Matrix" to measureForN(fib::matrix),
     )
 
-    result.forEach { (k, v) ->
-        println("$k:")
-        v.forEachIndexed { i, time ->
+    result.forEach { (algorithmName, measures) ->
+        println("\n$algorithmName:")
+        measures.forEachIndexed { i, time ->
             println("${NLIST[i]} - $time")
         }
     }

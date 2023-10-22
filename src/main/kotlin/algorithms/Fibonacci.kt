@@ -36,6 +36,7 @@ class Fibonacci {
     // 1.5. Определение четности n-го большого числа Фибоначчи
     fun isEqual(n: Long): Boolean = n % 3 == 0L
 
+    // 1.6. Вычисление n-го числа матричным алоритмом
     fun matrix(n: Int): Int {
         val id = arrayOf(intArrayOf(1, 0), intArrayOf(0, 1))
         var result = id
