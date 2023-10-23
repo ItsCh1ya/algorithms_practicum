@@ -1,33 +1,79 @@
 import algorithms.Fibonacci
-import kotlin.time.Duration
+import algorithms.Huffman
+import common.FS
+import java.util.*
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
-val NLIST = listOf(10, 20, 30)
-
 @OptIn(ExperimentalTime::class)
-private fun measureForN(algorithm: (input: Int) -> Unit): List<Duration> {
-    return NLIST.map { n ->
-        measureTime {
-            algorithm(n)
-        }
-    }
-}
+fun main() {
+    val scanner = Scanner(System.`in`)
+    while (true) {
+        println("Choose an algorithm:")
+        println("1. Fibonacci")
+        println("2. Huffman")
+        println("3. Quit")
+        print("Enter your choice: ")
 
-fun main(args: Array<String>) {
-    val fib = Fibonacci()
-    val result: Map<String, List<Duration>> = mapOf(
-        "Recursive" to measureForN(fib::recursive),
-        "Recursive optimized" to measureForN(fib::recursiveOptimized),
-        "Iterative " to measureForN(fib::iterative),
-        "Binet" to measureForN(fib::binet),
-        "Matrix" to measureForN(fib::matrix),
-    )
+        when (scanner.nextInt()) {
+            1 -> {
+                println("Choose a Fibonacci method:")
+                println("1. Recursive")
+                println("2. Iterative")
+                println("3. Recursive Optimized")
+                println("4. Binet Formula")
+                println("5. Matrix Exponentiation")
+                println("6. Equal or Odd")
+                print("Enter your choice: ")
+                val fibChoice = scanner.nextInt()
 
-    result.forEach { (algorithmName, measures) ->
-        println("\n$algorithmName:")
-        measures.forEachIndexed { i, time ->
-            println("${NLIST[i]} - $time")
+                print("Enter the input value (n): ")
+                val n = scanner.nextInt()
+
+                val time = measureTime {
+                    val fibonacci = Fibonacci()
+                    val result = when (fibChoice) {
+                        1 -> fibonacci.recursive(n)
+                        2 -> fibonacci.iterative(n)
+                        3 -> fibonacci.recursiveOptimized(n)
+                        4 -> fibonacci.binet(n)
+                        5 -> fibonacci.matrix(n)
+                        6 -> fibonacci.isEqual(n)
+                        else -> 0 // Invalid choice
+                    }
+                    println("Result: $result")
+                }
+
+                println("Time taken: $time")
+            }
+            2 -> {
+                println("Choose a Huffman method:")
+                println("1. Encode")
+                println("2. Decode (from src/main/resources/huffmanIO.txt)")
+                print("Enter your choice: ")
+                val hufChoice = scanner.nextInt()
+
+                val time = measureTime {
+                    val huffman = Huffman(FS())
+                    val result = when (hufChoice) {
+                        1 -> {
+                            print("Enter the text to encode: ")
+                            val n = readln()
+                            huffman.encode(n)
+                        }
+                        2 -> huffman.decode()
+                        else -> 0 // Invalid choice
+                    }
+                    println("Result: $result")
+                }
+
+                println("Time taken: $time")
+            }
+            3 -> {
+                println("Goodbye!")
+                return
+            }
+            else -> println("Invalid choice. Try again.")
         }
     }
 }
