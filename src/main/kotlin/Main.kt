@@ -38,7 +38,7 @@ fun main() {
                         3 -> fibonacci.recursiveOptimized(n)
                         4 -> fibonacci.binet(n)
                         5 -> fibonacci.matrix(n)
-                        6 -> fibonacci.isEqual(n)
+                        6 -> fibonacci.isEven(n)
                         else -> 0 // Invalid choice
                     }
                     println("Result: $result")

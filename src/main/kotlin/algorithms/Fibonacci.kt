@@ -34,7 +34,7 @@ class Fibonacci {
     }
 
     // 1.5. Определение четности n-го большого числа Фибоначчи
-    fun isEqual(n: Int): Boolean = n % 3L == 0L
+    fun isEven(n: Int): Boolean = n % 3L == 0L
 
     // 1.6. Вычисление n-го числа матричным алоритмом
     fun matrix(n: Int): Int {
